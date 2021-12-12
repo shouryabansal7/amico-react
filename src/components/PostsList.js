@@ -11,7 +11,7 @@ class PostsList extends Component {
             <div className="post-header">
               <div className="post-avatar">
                 <img
-                  src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                  src="https://avatars.dicebear.com/api/avataaars/9995.svg"
                   alt="user-pic"
                 />
                 <div>
@@ -32,7 +32,7 @@ class PostsList extends Component {
 
                 <div className="post-comments-icon">
                   <img
-                    src="https://image.flaticon.com/icons/svg/1380/1380338.svg"
+                    src="https://cdn-icons-png.flaticon.com/512/1380/1380338.png"
                     alt="comments-icon"
                   />
                   <span>{post.comments.length}</span>

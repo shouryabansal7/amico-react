@@ -23,7 +23,7 @@ class Navbar extends React.Component {
         <div className="search-container">
           <img
             className="search-icon"
-            src="https://image.flaticon.com/icons/svg/483/483356.svg"
+            src="https://cdn-icons.flaticon.com/png/512/3031/premium/3031293.png?token=exp=1638713584~hmac=fc38f0a7f8e97636f5d4c85e28eac482"
             alt="search-icon"
           />
           <input placeholder="Search" />
@@ -32,14 +32,14 @@ class Navbar extends React.Component {
             <ul>
               <li className="search-results-row">
                 <img
-                  src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                  src="https://avatars.dicebear.com/api/avataaars/9990.svg"
                   alt="user-dp"
                 />
                 <span>John Doe</span>
               </li>
               <li className="search-results-row">
                 <img
-                  src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                  src="https://avatars.dicebear.com/api/avataaars/9991.svg"
                   alt="user-dp"
                 />
                 <span>John Doe</span>
@@ -48,28 +48,30 @@ class Navbar extends React.Component {
           </div>
         </div>
         <div className="right-nav">
-          {auth.isLoggedin && (
+          {auth.isLoggedIn && (
             <div className="user">
-              <img
-                src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
-                alt="user-dp"
-                id="user-dp"
-              />
+              <Link to="/setting">
+                <img
+                  src="https://avatars.dicebear.com/api/avataaars/9992.svg"
+                  alt="user-dp"
+                  id="user-dp"
+                />
+              </Link>
               <span>{auth.user.name}</span>
             </div>
           )}
 
           <div className="nav-links">
             <ul>
-              {!auth.isLoggedin && (
+              {!auth.isLoggedIn && (
                 <li>
                   <Link to="/login">Log in</Link>
                 </li>
               )}
 
-              {auth.isLoggedin && <li onClick={this.logOut}>Log out</li>}
+              {auth.isLoggedIn && <li onClick={this.logOut}>Log out</li>}
 
-              {!auth.isLoggedin && (
+              {!auth.isLoggedIn && (
                 <li>
                   <Link to="/signup">Register</Link>
                 </li>
