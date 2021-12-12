@@ -12,6 +12,7 @@ import {
 import { Navbar, Home, Page404, Login, Signup, Settings } from './';
 import { authenticateUser } from '../actions/auth';
 import jwtDecode from 'jwt-decode';
+import { getAuthTokenFromLocalStorage } from '../helper/utils';
 
 const PrivateRoute = (privateRouteProps) => {
   const { isLoggedIn, component: Component, path } = privateRouteProps;
@@ -41,7 +42,7 @@ class App extends React.Component {
   componentDidMount() {
     this.props.dispatch(fetchPosts());
 
-    const token = localStorage.getItem('token');
+    const token = getAuthTokenFromLocalStorage();
 
     if (token) {
       const user = jwtDecode(token);

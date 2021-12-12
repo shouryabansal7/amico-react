@@ -7,3 +7,7 @@ export function getFormBody(params) {
   }
   return fromBody.join('&'); // aakash 123 => aakash%2020123
 }
+
+export function getAuthTokenFromLocalStorage() {
+  return localStorage.getItem('token');
+}
