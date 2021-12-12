@@ -9,11 +9,9 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
-import { Navbar, Home, Page404, Login, Signup } from './';
+import { Navbar, Home, Page404, Login, Signup, Settings } from './';
 import { authenticateUser } from '../actions/auth';
 import jwtDecode from 'jwt-decode';
-
-const Settings = () => <div>Settings</div>;
 
 const PrivateRoute = (privateRouteProps) => {
   const { isLoggedIn, component: Component, path } = privateRouteProps;
@@ -22,7 +20,18 @@ const PrivateRoute = (privateRouteProps) => {
     <Route
       path={path}
       render={(props) => {
-        return isLoggedIn ? <Component {...props} /> : <Redirect to="/login" />;
+        return isLoggedIn ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/login',
+              state: {
+                from: props.location,
+              },
+            }}
+          />
+        );
       }}
     />
   );
