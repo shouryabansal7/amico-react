@@ -51,8 +51,8 @@ export function login(email, password) {
         if (data.success) {
           console.log('login data', data.user);
           //dispatch action to save the user
-          localStorage.setItem('token', data.token);
-          dispatch(loginSuccess(data.user));
+          localStorage.setItem('token', data.data.token);
+          dispatch(loginSuccess(data.data.user));
           return;
         }
         dispatch(loginFailed(data.message));

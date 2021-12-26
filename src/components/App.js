@@ -9,18 +9,30 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
-import { Navbar, Home, Page404, Login, Signup, Settings } from './';
+import {
+  Navbar,
+  Home,
+  Page404,
+  Login,
+  Signup,
+  Settings,
+  UserProfile,
+} from './';
 import { authenticateUser } from '../actions/auth';
 import jwtDecode from 'jwt-decode';
 import { getAuthTokenFromLocalStorage } from '../helper/utils';
+import { fetchUserFriends } from '../actions/friends';
 
 const PrivateRoute = (privateRouteProps) => {
   const { isLoggedIn, component: Component, path } = privateRouteProps;
-
+  console.log('reached private routes');
   return (
     <Route
       path={path}
       render={(props) => {
+        console.log('props', props);
+
+        console.log('isLoggedin', isLoggedIn);
         return isLoggedIn ? (
           <Component {...props} />
         ) : (
@@ -55,11 +67,12 @@ class App extends React.Component {
           name: user.name,
         })
       );
+      this.props.dispatch(fetchUserFriends());
     }
   }
 
   render() {
-    const { posts, auth } = this.props;
+    const { posts, auth, friends } = this.props;
     return (
       <Router>
         <div>
@@ -69,7 +82,14 @@ class App extends React.Component {
               exact
               path="/"
               render={(props) => {
-                return <Home {...props} posts={posts} />;
+                return (
+                  <Home
+                    {...props}
+                    posts={posts}
+                    friends={friends}
+                    isLoggedIn={auth.isLoggedIn}
+                  />
+                );
               }}
             />
             <Route path="/login" component={Login} />
@@ -77,6 +97,11 @@ class App extends React.Component {
             <PrivateRoute
               path="/setting"
               component={Settings}
+              isLoggedIn={auth.isLoggedIn}
+            />
+            <PrivateRoute
+              path="/user/:userId"
+              component={UserProfile}
               isLoggedIn={auth.isLoggedIn}
             />
             <Route component={Page404} />
@@ -95,6 +120,7 @@ function mapStateToProps(state) {
   return {
     posts: state.posts,
     auth: state.auth,
+    friends: state.friends,
   };
 }
 export default connect(mapStateToProps)(App);

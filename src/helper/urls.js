@@ -5,4 +5,6 @@ export const APIurls = {
   signup: () => `${API_ROOT}/users/create`,
   fetchPosts: () => `${API_ROOT}/posts`,
   editProfile: () => `${API_ROOT}/users/edit`,
+  userProfile: (userId) => `${API_ROOT}/users/${userId}`,
+  userFriends: () => `${API_ROOT}/friendship/fetch_user_friends`,
 };
