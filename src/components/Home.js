@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { PostsList, FriendsList } from './';
 
 class Home extends React.Component {

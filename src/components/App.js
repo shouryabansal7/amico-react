@@ -4,7 +4,6 @@ import { fetchPosts } from '../actions/posts';
 import PropTypes from 'prop-types';
 import {
   BrowserRouter as Router,
-  Link,
   Route,
   Switch,
   Redirect,
