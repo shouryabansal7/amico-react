@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Comment } from './';
-import { createComment } from '../actions/posts';
+import { addLike, createComment } from '../actions/posts';
 
 class Post extends Component {
   constructor(props) {
@@ -33,6 +33,11 @@ class Post extends Component {
     });
   };
 
+  handlePostLike = () => {
+    const { post, user } = this.props;
+    this.props.dispatch(addLike(post._id, 'Post', user._id));
+  };
+
   render() {
     const { post } = this.props;
     const { comment } = this.state;
@@ -55,17 +60,17 @@ class Post extends Component {
           <div className="post-content">{post.content}</div>
 
           <div className="post-actions">
-            <div className="post-like">
+            <button className="post-like no-btn" onClick={this.handlePostLike}>
               <img
-                src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
+                src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png"
                 alt="likes-icon"
               />
               <span>{post.likes.length}</span>
-            </div>
+            </button>
 
             <div className="post-comments-icon">
               <img
-                src="https://image.flaticon.com/icons/svg/1380/1380338.svg"
+                src="https://cdn-icons-png.flaticon.com/512/1380/1380338.png"
                 alt="comments-icon"
               />
               <span>{post.comments.length}</span>
@@ -95,4 +100,10 @@ Post.propTypes = {
   post: PropTypes.object.isRequired,
 };
 
-export default connect()(Post);
+function mapStateToProps({ auth }) {
+  return {
+    user: auth.user,
+  };
+}
+
+export default connect(mapStateToProps)(Post);
