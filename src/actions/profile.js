@@ -27,7 +27,6 @@ export function userProfileFailed(error) {
 }
 
 export function fetchUserProfile(userId) {
-  console.log('reached');
   return (dispatch) => {
     dispatch(startUserProfileFetch());
 

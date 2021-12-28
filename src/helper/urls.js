@@ -1,4 +1,5 @@
 const API_ROOT = 'http://localhost:8000/api/v2';
+const API_ROOT1 = 'http://codeial.com:8000/api/v2';
 
 export const APIurls = {
   login: () => `${API_ROOT}/users/create-session`,
@@ -15,4 +16,5 @@ export const APIurls = {
   createComment: () => `${API_ROOT}/comments/`,
   toggleLike: (id, likeType) =>
     `${API_ROOT}/likes/toggle?likeable_id=${id}&likeable_type=${likeType}`,
+  userSearch: (searchText) => `${API_ROOT1}/users/search?text=${searchText}`,
 };
